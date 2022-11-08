@@ -12,7 +12,7 @@ function MainHeader() {
   const { user } = useAuth();
 
   return (
-    <Box>
+    <Box minWidth={12}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton

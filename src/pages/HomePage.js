@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Box, Container, Stack } from "@mui/material";
+import { Alert, Container, Stack } from "@mui/material";
 import ProductFilter from "../components/ProductFilter";
 import ProductSearch from "../components/ProductSearch";
 import ProductSort from "../components/ProductSort";
@@ -46,26 +46,38 @@ function HomePage() {
   }, []);
 
   return (
-    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
-      <Stack>
+    <Container
+      spacing={2}
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: { xs: "center", md: "space-between" },
+        alignItems: { xs: "space-between", md: "none" },
+        mt: 2,
+      }}
+    >
+      <Stack width={{ xs: 1, md: 0.2 }} mb={2}>
         <FormProvider methods={methods}>
           <ProductFilter resetFilter={reset} />
         </FormProvider>
       </Stack>
-      <Stack sx={{ flexGrow: 1 }}>
+
+      <Stack width={{ xs: 1, md: 0.8 }}>
         <FormProvider methods={methods}>
           <Stack
             spacing={2}
-            direction={{ xs: "column", sm: "row" }}
-            alignItems={{ sm: "center" }}
-            justifyContent="space-between"
+            direction={{ xs: "column", md: "row" }}
+            alignItems={{ xs: "center", md: "space-between" }}
+            justifyContent={{ xs: "center", md: "space-between" }}
             mb={2}
+            flexGrow={1}
           >
             <ProductSearch />
             <ProductSort />
           </Stack>
         </FormProvider>
-        <Box sx={{ position: "relative", height: 1 }}>
+
+        <Stack sx={{ position: "relative" }}>
           {loading ? (
             <LoadingScreen />
           ) : (
@@ -77,7 +89,7 @@ function HomePage() {
               )}
             </>
           )}
-        </Box>
+        </Stack>
       </Stack>
     </Container>
   );
