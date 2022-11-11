@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Container, Stack } from "@mui/material";
+import { Alert, Box, Container, Stack } from "@mui/material";
 import ProductFilter from "../components/ProductFilter";
 import ProductSearch from "../components/ProductSearch";
 import ProductSort from "../components/ProductSort";
@@ -45,39 +45,28 @@ function HomePage() {
     getProducts();
   }, []);
 
+  console.log(reset);
   return (
-    <Container
-      spacing={2}
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        justifyContent: { xs: "center", md: "space-between" },
-        alignItems: { xs: "space-between", md: "none" },
-        mt: 2,
-      }}
-    >
-      <Stack width={{ xs: 1, md: 0.2 }} mb={2}>
+    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
+      <Stack>
         <FormProvider methods={methods}>
-          <ProductFilter resetFilter={reset} />
+          <ProductFilter resetFilters={reset} />
         </FormProvider>
       </Stack>
-
-      <Stack width={{ xs: 1, md: 0.8 }}>
+      <Stack sx={{ flexGrow: 1 }}>
         <FormProvider methods={methods}>
           <Stack
             spacing={2}
-            direction={{ xs: "column", md: "row" }}
-            alignItems={{ xs: "center", md: "space-between" }}
-            justifyContent={{ xs: "center", md: "space-between" }}
+            direction={{ xs: "column", sm: "row" }}
+            alignItems={{ sm: "center" }}
+            justifyContent="space-between"
             mb={2}
-            flexGrow={1}
           >
             <ProductSearch />
             <ProductSort />
           </Stack>
         </FormProvider>
-
-        <Stack sx={{ position: "relative" }}>
+        <Box sx={{ position: "relative", height: 1 }}>
           {loading ? (
             <LoadingScreen />
           ) : (
@@ -89,7 +78,7 @@ function HomePage() {
               )}
             </>
           )}
-        </Stack>
+        </Box>
       </Stack>
     </Container>
   );
@@ -97,12 +86,12 @@ function HomePage() {
 
 function applyFilter(products, filters) {
   const { sortBy } = filters;
+  console.log(filters);
   let filteredProducts = products;
 
   // SORT BY
   if (sortBy === "featured") {
     filteredProducts = orderBy(products, ["sold"], ["desc"]);
-    console.log(filteredProducts);
   }
   if (sortBy === "newest") {
     filteredProducts = orderBy(products, ["createdAt"], ["desc"]);
