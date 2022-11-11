@@ -26,12 +26,7 @@ export const FILTER_PRICE_OPTIONS = [
 
 function ProductFilter({ resetFilter }) {
   return (
-    <Stack
-      direction={{ xs: "row", md: "column" }}
-      flexWrap={{ xs: "wrap" }}
-      justifyContent={{ xs: "space-between", md: "none" }}
-      xs={{ height: 1 }}
-    >
+    <Stack spacing={3} sx={{ p: 3, width: 250 }}>
       <Stack spacing={1}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Gender
@@ -58,16 +53,11 @@ function ProductFilter({ resetFilter }) {
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Price
         </Typography>
-
-        <Stack>
-          <FRadioGroup
-            component="div"
-            sx={{ display: "flex", flexDirection: "column" }}
-            name="priceRange"
-            options={FILTER_PRICE_OPTIONS.map((item) => item.value)}
-            getOptionLabel={FILTER_PRICE_OPTIONS.map((item) => item.label)}
-          />
-        </Stack>
+        <FRadioGroup
+          name="priceRange"
+          options={FILTER_PRICE_OPTIONS.map((item) => item.value)}
+          getOptionLabel={FILTER_PRICE_OPTIONS.map((item) => item.label)}
+        />
       </Stack>
 
       <Box>
